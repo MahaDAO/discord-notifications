@@ -28,6 +28,7 @@ export const sendMessage = (
 ) => {
   if (!messageMarkdown) return;
   const channel = client.channels.cache.get(channelName);
+  console.log(channelName, channel);
   (channel as TextChannel).send(messageMarkdown);
 };
 

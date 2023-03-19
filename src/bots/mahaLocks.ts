@@ -87,8 +87,9 @@ const craftMessage = (
 ) => {
   let dots = "";
 
+  const max = Math.min(noOfTotalDots, 100);
   if (dotType) {
-    for (let i = 0; i < noOfTotalDots; i++) {
+    for (let i = 0; i < max; i++) {
       if (dotType == "green") dots += "🚀";
       else dots += "🔴";
     }
