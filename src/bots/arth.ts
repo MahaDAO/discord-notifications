@@ -5,12 +5,12 @@ import troveManagerABI from "../abi/TroveManager.json";
 
 import * as discord from "../helper/discord";
 import { IEvent } from "../utils/interfaces";
-import { WebSocketProvider } from "@ethersproject/providers";
 
 import { toDisplayNumber } from "../utils/formatValues";
 import { ethers } from "ethers";
 import { getCollateralPrices } from "../utils/getCollateralPrices";
 import { handleEmbedMessage } from "../helper/handleMessage";
+import { provider } from "../utils/web3";
 
 const craftMessage = (
   msg: string,
@@ -161,12 +161,8 @@ const craftMessageFromEvent = async (data: IEvent) => {
 export default () => {
   console.log("listening for arth events");
 
-  const chainWss = nconf.get("RPC_WSS");
-
   const borrowingOperationsAddr = nconf.get("CONTRACT_ARTH_BO");
   const troveManagerAddr = nconf.get("CONTRACT_ARTH_TM");
-
-  const provider = new WebSocketProvider(chainWss);
 
   const borrowerOperations = new ethers.Contract(
     borrowingOperationsAddr,

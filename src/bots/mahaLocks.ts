@@ -9,6 +9,7 @@ import { toDisplayNumber } from "../utils/formatValues";
 import { getCollateralPrices } from "../utils/getCollateralPrices";
 import { IEvent } from "../utils/interfaces";
 import { handleEmbedMessage } from "../helper/handleMessage";
+import { provider } from "../utils/web3";
 
 const craftMessageFromEvent = async (
   data: IEvent,
@@ -111,12 +112,10 @@ const craftMessage = (
 export default () => {
   console.log("listening for maha lock events");
 
-  const chainWss = nconf.get("RPC_WSS");
   const explorer = "https://etherscan.io";
   const contract = nconf.get("CONTRACT_LOCKER");
   const opensea = `https://opensea.io/assets/ethereum/${contract}`;
 
-  const provider = new WebSocketProvider(chainWss);
   const Locker = new ethers.Contract(contract, MAHAX, provider);
 
   Locker.on("Deposit", async (...args) => {
