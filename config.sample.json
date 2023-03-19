@@ -1,24 +1,30 @@
 {
-  "DISCORD_CLIENT_TOKEN": "------",
-  "DISCORD_GUILD_ID": "------",
+  "TWITTER_API_KEY": "-------",
+  "TWITTER_API_SECRET": "-------",
+  "TWITTER_ACCESS_TOKEN": "-------",
+  "TWITTER_ACCESS_TOKEN_SECRET": "-------",
+  "TWITTER_BEARER_TOKEN": "-------",
+  "TWITTER_CLIENT_KEY": "-------",
+  "TWITTER_CLIENT_SECRET": "-------",
+  "TWITTER_CONSUMER_KEY": "-------",
+  "TWITTER_CONSUMER_SECRET": "-------",
 
-  "CHANNEL_LENDING": "------",
-  "CHANNEL_MAHA_LOCKS": "------",
-  "CHANNEL_ARTH_ACTIVITY": "------",
-  "CHANNEL_TWITTER_COMMUNITY": "------",
-  "CHANNEL_GM": "------",
+  "CONTRACT_POOL": "-------",
+  "CONTRACT_LOCKER": "-------",
+  "CONTRACT_ARTH_BO": "-------",
+  "CONTRACT_ARTH_TM": "-------",
 
-  "TWITTER_API_KEY": "------",
-  "TWITTER_API_SECRET": "------",
-  "TWITTER_ACCESS_TOKEN": "------",
-  "TWITTER_ACCESS_TOKEN_SECRET": "------",
+  "RPC_WSS": "-------",
+  "NODE_ENV": "-------",
 
-  "CONTRACT_POOL": "------",
-  "CONTRACT_LOCKER": "------",
-  "CONTRACT_ARTH_BO": "------",
-  "CONTRACT_ARTH_TM": "------",
+  "DISCORD_CLIENT_TOKEN": "-------",
+  "DISCORD_GUILD_ID": "-------",
+  "DISCORD_CLIENT_ID": "-------",
+  "DISCORD_CLIENT_SECRET": "-------",
 
-  "DATABASE_URI": "------",
-  "RPC_WSS": "------",
-  "NODE_ENV": "------"
+  "CHANNEL_LENDING": "-------",
+  "CHANNEL_MAHA_LOCKS": "-------",
+  "CHANNEL_ARTH_ACTIVITY": "-------",
+  "CHANNEL_TWITTER_COMMUNITY": "-------",
+  "CHANNEL_WALLET_CONNECT": "-------"
 }
