@@ -19,6 +19,7 @@ const craftMessage = (
   noOfTotalDots: number,
   dotType?: "green" | "red"
 ) => {
+
   let dots = "";
 
   if (dotType && noOfTotalDots > 0) {
@@ -61,7 +62,7 @@ const craftMessageFromEvent = async (data: IEvent) => {
     console.log("TroveUpdated", _borrower, _debt, _coll, stake, operation);
 
     if (operation == 0) {
-      const noOfTotalDots = Math.ceil(_coll / 0.1);
+      const noOfTotalDots = Math.ceil(coll / 0.1);
       const msg = `Loan of \`*${debt}* ARTH\` is created by ${_borrower} with \`${coll} ETH\` ${price}.`;
 
       return craftMessage(
@@ -85,8 +86,7 @@ const craftMessageFromEvent = async (data: IEvent) => {
       const msg =
         `**${_borrower}**'s loan was modified. It now has a debt of \`${debt} ARTH\`` +
         ` against a collateral of \`${coll} ETH\` ${price}.`;
-
-      const noOfTotalDots = Math.ceil(_coll / 0.1);
+      const noOfTotalDots = Math.ceil(coll / 0.1);
 
       return craftMessage(
         msg,
@@ -179,7 +179,6 @@ export default () => {
     // event TroveUpdated(address indexed _borrower, uint _debt, uint _coll, uint stake, uint8 operation);
     const msg = await craftMessageFromEvent(args[5]);
     const embedMessage = await handleEmbedMessage(msg || "");
-    console.log(msg);
     discord.sendMessage(nconf.get("CHANNEL_ARTH_ACTIVITY"), embedMessage);
   });
 
