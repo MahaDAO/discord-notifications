@@ -11,4 +11,6 @@ export interface IEvent {
   event: string;
   eventSignature: string;
   args: any[];
+  fragment: any;
+  log: any;
 }

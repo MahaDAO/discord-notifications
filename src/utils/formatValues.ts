@@ -1,16 +1,19 @@
-import { BigNumber, ethers } from "ethers";
-import { formatUnits } from "ethers/lib/utils";
+import { BigNumberish, ethers, formatUnits } from "ethers";
+// import { formatUnits } from "ethers/lib/utils";
 import Numeral from "numeral";
 
 export const toDisplayNumber = (value: number) => {
-  const bn = BigNumber.from(value.toString());
-  const valToNum = ethers.utils.formatEther(bn);
+  const bn: BigNumberish = value.toString();
+  const valToNum = ethers.formatEther(bn);
   const numeralVal = Numeral(valToNum).format("0.000");
   if (numeralVal == "0.000") return valToNum;
   return numeralVal;
 };
 
-export function getBalance(balance: BigNumber | string, decimals = 18): string {
+export function getBalance(
+  balance: BigNumberish | string,
+  decimals = 18
+): string {
   try {
     return formatUnits(balance, decimals);
   } catch (err) {
@@ -19,7 +22,7 @@ export function getBalance(balance: BigNumber | string, decimals = 18): string {
 }
 
 export const getDisplayBalance = (
-  balance: BigNumber | string,
+  balance: BigNumberish | string,
   decimals = 18,
   fractionDigits = 5
 ): string => {

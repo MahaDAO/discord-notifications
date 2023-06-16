@@ -1,7 +1,6 @@
 import nconf from "nconf";
 import moment from "moment";
 import { ethers } from "ethers";
-import { WebSocketProvider } from "@ethersproject/providers";
 
 import MAHAX from "../abi/MAHAX.json";
 import * as discord from "../helper/discord";
@@ -20,14 +19,14 @@ const craftMessageFromEvent = async (
 
   const prices = await getCollateralPrices();
 
-  if (data.event == "Transfer") {
+  if (data.fragment.name == "Transfer") {
     // emit Transfer(_from, _to, _tokenId);
     const from = data.args[0];
     const to = data.args[1];
     const tokenId = data.args[2];
 
     console.log("transfer", from, to, tokenId);
-  } else if (data.event == "Deposit") {
+  } else if (data.fragment.name == "Deposit") {
     //   emit Deposit(
     //     from,
     //     _tokenId,
@@ -39,7 +38,7 @@ const craftMessageFromEvent = async (
     const who = data.args[0];
     const tokenId = Number(data.args[1]);
     const value = Number(toDisplayNumber(data.args[2]));
-    const locktime: number = data.args[3].toNumber();
+    const locktime: number = Number(data.args[3]);
     const depositType = Number(data.args[4]);
 
     const noOfTotalDots = Math.ceil(value / 50);
@@ -62,14 +61,14 @@ const craftMessageFromEvent = async (
 
     return craftMessage(
       msg,
-      data.transactionHash,
+      data.log.transactionHash,
       tokenId,
       noOfTotalDots,
       explorer,
       opensea,
-      data.event == "Deposit" ? "green" : "red"
+      data.fragment.name == "Deposit" ? "green" : "red"
     );
-  } else if (data.event == "Withdraw") {
+  } else if (data.fragment.name == "Withdraw") {
     const who = data.args[0];
     const url = `${explorer}/address/${who}`;
     msg = `A NFT is has been withdrawn by [${who}](${url})`;
