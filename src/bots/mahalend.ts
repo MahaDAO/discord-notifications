@@ -1,6 +1,5 @@
 import nconf from "nconf";
-import { ethers } from "ethers";
-import { WebSocketProvider } from "@ethersproject/providers";
+import { ethers, WebSocketProvider } from "ethers";
 
 import PoolABI from "../abi/Pool.json";
 import * as discord from "../helper/discord";
