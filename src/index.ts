@@ -6,5 +6,5 @@ arth();
 mahaLocks();
 // twitterMetions();
 
-setInterval(arth, 600000);
-setInterval(mahaLocks, 600000);
+setInterval(arth, 60000);
+setInterval(mahaLocks, 60000);
