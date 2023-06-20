@@ -5,3 +5,6 @@ import mahaLocks from "./bots/mahaLocks";
 arth();
 mahaLocks();
 // twitterMetions();
+
+setInterval(arth, 600000);
+setInterval(mahaLocks, 600000);
