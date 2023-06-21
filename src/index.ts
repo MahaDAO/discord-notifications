@@ -11,7 +11,7 @@ const app = express();
 const server = new http.Server(app);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false, limit: "50mb" }));
 
 // arth();
 // mahaLocks();
