@@ -10,7 +10,7 @@ const abiCoder = new ethers.AbiCoder();
 
 export const getMahalock = async (req: any, res: any) => {
   const webhookData = req.body;
-  //   console.log(webhookData.event.data.block);
+  console.log(webhookData.event.data.block);
 
   const explorer = "https://etherscan.io";
   const contract = nconf.get("CONTRACT_LOCKER");
