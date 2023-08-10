@@ -81,7 +81,7 @@ export const getMahalock = async (req: any, res: any) => {
       const depositType = Number(result[2]);
       const lockTime: number = Number(result[3]);
       const noOfTotalDots = Math.ceil(value / 50);
-      const m = moment(Date.now() + lockTime * 1000).format("DD MMM YYYY");
+      const m = moment(lockTime * 1000).format("DD MMM YYYY");
 
       const price = prices.MAHA
         ? `*($${(value * prices.MAHA).toFixed(2)})*`

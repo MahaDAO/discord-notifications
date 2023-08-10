@@ -43,7 +43,7 @@ const craftMessageFromEvent = async (
 
     const noOfTotalDots = Math.ceil(value / 50);
 
-    const m = moment(Date.now() + locktime * 1000).format("DD MMM YYYY");
+    const m = moment(locktime * 1000).format("DD MMM YYYY");
 
     const price = prices.MAHA ? `*($${(value * prices.MAHA).toFixed(2)})*` : "";
 
