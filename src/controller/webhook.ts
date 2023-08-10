@@ -57,6 +57,11 @@ const eventType = (eventHash: string) => {
     "0x4cf4410cc57040e44862ef0f45f3dd5a5e02db8eb8add648d4b0e236f1d07dca".toLowerCase()
   ) {
     return "CallScheduled";
+  } else if (
+    eventHash.toLowerCase() ===
+    "0xc2617efa69bab66782fa219543714338489c4e9e178271560a91b82c3f612b58".toLowerCase()
+  ) {
+    return "CallExecuted";
   } else {
     return "";
   }
@@ -114,16 +119,47 @@ export const getMahalock = async (req: any, res: any) => {
   res.send({ success: true });
 };
 
-export const getCallExecute = async (req: any, res: any) => {
+export const timelock12Day = async (req: any, res: any) => {
   const webhookData = req.body;
-  Bluebird.mapSeries(webhookData.event.data.block.logs, async (item: any) => {
+  const hash = `<${explorer}/tx/${webhookData.event.data.block.hash}>`;
+  const time = "12";
+  await handleEvents(webhookData.event.data.block.logs, hash, time);
+  res.send({ success: true });
+};
+
+export const timelock14Day = async (req: any, res: any) => {
+  const webhookData = req.body;
+  const hash = `<${explorer}/tx/${webhookData.event.data.block.hash}>`;
+  const time = "14";
+  await handleEvents(webhookData.event.data.block.logs, hash, time);
+  res.send({ success: true });
+};
+
+export const timelock30Day = async (req: any, res: any) => {
+  const webhookData = req.body;
+  const hash = `<${explorer}/tx/${webhookData.event.data.block.hash}>`;
+  const time = "30";
+  await handleEvents(webhookData.event.data.block.logs, hash, time);
+  res.send({ success: true });
+};
+
+const handleEvents = async (logs: any, txHash: string, time: string) => {
+  Bluebird.mapSeries(logs, async (item: any) => {
+    const who = item.transaction.from.address;
+    let message = "";
     if (eventType(item.topics[0]) === "CallScheduled") {
-      const hash = `<${explorer}/tx/${webhookData.event.data.block.hash}>`;
-      const message =
-        `A new transaction is scheduled\n\n` + `Transaction: ${hash}\n`;
+      message =
+        `A transaction: ${txHash}\n\n` +
+        `created by ${who} has scheduled a call on the ${time} day timelock`;
+    } else if (eventType(item.topics[0]) === "CallExecuted") {
+      message =
+        `A transaction: ${txHash}\n\n` +
+        `created by ${who} has executed a call on the ${time} day timelock`;
+    }
+
+    if (message !== "") {
       const embedMessage = await handleEmbedMessage(message || "");
       discord.sendMessage(nconf.get("CHANNEL_PROPOSAL"), embedMessage);
     }
   });
-  res.send({ success: true });
 };
