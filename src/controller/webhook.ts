@@ -84,7 +84,7 @@ export const getMahalock = async (req: any, res: any) => {
       const tokenId = Number(result[0]);
       const value = Number(toDisplayNumber(result[1]));
       const depositType = Number(result[2]);
-      const lockTime: number = Number(result[3]);
+      const lockTime: number = parseInt(item.topics[2], 16);
       const noOfTotalDots = Math.ceil(value / 50);
       const m = moment(lockTime * 1000).format("DD MMM YYYY");
 
